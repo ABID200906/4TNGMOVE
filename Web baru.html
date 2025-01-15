@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Autonomous</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key="272004"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+  <!-- Header with Logo and Website Name -->
+  <header class="app-header">
+    <div class="logo-container">
+      <img src="Gambar.jpg" alt="Logo" class="logo">
+      <h1 class="website-name">4TangMove</h1>
+    </div>
+    <div class="datetime">
+      <p id="date"></p>
+      <p id="time"></p>
+    </div>
+  </header>
+
+  <main>
+    <section id="map" class="section visible">
+      <h2>Pelacakan Posisi Bus</h2>
+      <div id="mapContainer"></div>
+    </section>
+
+    <section id="route" class="section hidden">
+      <h2>Rute Pasar Ceplak - Tugu Kronjo</h2>
+      <div class="route-container">
+        <div class="route-line">
+          <div class="station">
+            <div class="icons">
+              <span class="icon red">A001</span>
+            </div>
+          </div>
+          <div class="station">
+            <div class="icons"></div>
+            <div class="station-name">Pasar Ceplak</div>
+          </div>
+          <div class="station">
+            <div class="icons"></div>
+            <div class="station-name">Pasar Bedeng</div>
+          </div>
+          <div class="station">
+            <div class="icons"></div>
+            <div class="station-name">Pasar Cayur</div>
+          </div>
+          <div class="station">
+            <div class="icons"></div>
+            <div class="station-name">MAN 4 Tangerang</div>
+          </div>
+          <div class="station">
+            <div class="icons"></div>
+            <div class="station-name">Pasilian</div>
+          </div>
+          <div class="station">
+            <div class="icons"></div>
+            <div class="station-name">Tugu Kronjo</div>
+          </div>
+        <!-- Tambahkan stasiun lainnya -->
+      </div>
+      <div class="legend">
+        <div>
+        <p>Tarif: Rp 3500,- | Jam Operasional: 05.00 - 22.00 WIB</p>
+      </div>
+    </section>
+    
+    
+
+    <section id="stops" class="section hidden">
+      <h2>Halte Terdekat</h2>
+      <div id="stops-container"></div>
+    </section>    
+
+    <section id="payment" class="section hidden">
+      <h2>Pembayaran QRIS</h2>
+      <p>Scan kode QR berikut untuk membayar perjalanan Anda:</p>
+      <div id="qris-container"></div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation Bar -->
+  <footer class="bottom-nav">
+    <button class="nav-item" onclick="showSection('map')">🗺️<span>Pelacakan</span></button>
+    <button class="nav-item" onclick="showSection('route')">🚌<span>Rute</span></button>
+    <button class="nav-item" onclick="showSection('stops')">📍<span>Halte</span></button>
+    <button class="nav-item" onclick="showSection('payment')">💳<span>Pembayaran</span></button>
+  </footer>
+
+  <script src="script.js"></script>
+  <style>
+    /* Animasi untuk rute bus */
+    .animated-container {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .section.visible .animated-container {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .route {
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #005BAC;
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .route h3 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+      color: #FFC107;
+    }
+
+    .route ul {
+      padding-left: 20px;
+      margin: 0;
+      list-style: none;
+    }
+
+    .route ul li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .route ul li::before {
+      content: "\2022";
+      color: #FFC107;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    #route-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</body>
+</html>
